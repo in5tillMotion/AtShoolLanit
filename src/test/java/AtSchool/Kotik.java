@@ -3,66 +3,103 @@ package AtSchool;
 import org.junit.Test;
 
 public class Kotik {
-    @Test
-    public void example1() {
-        Kotik kotik = new Kotik();
-        kotik.prettiness = 9999;
-        kotik.name = "Рыжый";
-        kotik.weight = 6327;//в граммах
 
+    int satiety;
+    String food;
+
+    public Kotik(int satiety, String food) {
+        this.satiety = satiety;
+        this.food = food;
     }
 
-    @Test
-    public void example2() {
-        Kotik kotik1; // Объявление переменной
-        Kotik kotik2; // Объявление переменной
-        kotik1 = new Kotik(); // инициализация переменной
-        kotik2 = kotik1; //Переприсваивание ссылки
-        kotik1.prettiness = 9999;
-        kotik1.name = "Рыжый";
-        kotik1.weight = 6327;//в граммах
-        System.out.println(kotik2.name + " - " + kotik2.prettiness);
-    }
-
-    @Test
-    public void example3() {
-        Kotik kotik1; // Объявление переменной
-        kotik1 = new Kotik(); // инициализация переменной
-        kotik1.prettiness = 9999;
-        kotik1.name = "Рыжый";
-        kotik1.weight = 6327;//в граммах
-        kotik1.meow = "Кря кря";
-        kotik1.sayMeow();
-    }
-
-    int prettiness;
-    int weight;
-    String name;
-    String meow;
-
-    //Конструктор без параметров, он идентичен конструктору по умолчанию, 
-    //который сюда бы подставила Java,    
-    // Но она его не подставит, по той причине, 
-    //что ниже определяется другой конструктор, с параметрами.
     public Kotik() {
     }
 
-    public Kotik(int prettiness, int weight, String name, String meow) {this.prettiness = prettiness;
-        this.weight = weight;this.name = name;this.meow = meow;}
-
-
-    void setKotik(int prettiness, String name, int weight, String meow) {
-        this.prettiness = prettiness;
-        this.weight = weight;
-        this.name = name;
-        this.meow = meow;
-    }
-
-    int giveMeMoney() {
-        return 100;
-    }
 
     void sayMeow() {
-        System.out.println(name + " говорит " + meow);
+        System.out.println("Котик Мяу-кает");
+        satiety = satiety - 10;
+    }
+
+    void play() {
+        System.out.println("Котик играется");
+        satiety = satiety - 50;
+    }
+
+    void sleep() {
+        System.out.println("Котик сладко спит");
+        satiety = satiety - 60;
+    }
+
+    void chaseMouse() {
+        System.out.println("Котик играет с мшыкой");
+        satiety = satiety - 50;
+    }
+
+    void claw() {
+        System.out.println("Котик точит когти");
+        satiety = satiety - 10;
+    }
+
+    void wash() {
+        System.out.println("Котик умывается");
+        satiety = satiety - 10;
+    }
+
+    void eat() {
+        eat(100, "kitekat");
+    }
+
+    void eat(int satiety) {
+        this.satiety = satiety;
+
+    }
+
+    void eat(int satiety, String food) {
+        this.satiety = satiety;
+        this.food = food;
+    }
+
+    void liveAnotherDay() {
+        int h = 6;
+        for (int i = 0; i < 24; i++) {
+            int flag = (int) (Math.random() * h + 1);
+            if (satiety > 0) {
+                switch (flag) {
+                    case 1:
+                        sayMeow();
+                        break;
+                    case 2:
+                        eat();
+                        break;
+                    case 3:
+                        play();
+                        break;
+                    case 4:
+                        claw();
+                        break;
+                    case 5:
+                        wash();
+                        break;
+                    case 6:
+                        sleep();
+                        break;
+
+                    default:
+                        throw new IllegalArgumentException("Incorrect value");
+                }
+            } else {
+                System.out.println("Котик хочет кушать!!!");
+                eat(100);
+                System.out.println("Котик вдоволь наелся");
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        Kotik kotik = new Kotik();
+        kotik.liveAnotherDay();
     }
 }
+
+
